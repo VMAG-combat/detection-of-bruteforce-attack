@@ -1,6 +1,8 @@
 <?php
-   include("config.php");
-   session_start();   
+   ini_set('display_errors','1');
+   include("Config.php");
+   session_start();
+   $error = "";   
    if($_SERVER["REQUEST_METHOD"] == "POST") {      
       $myusername = mysqli_real_escape_string($db,$_POST['username']);
       $mypassword = mysqli_real_escape_string($db,$_POST['password']);       
@@ -12,6 +14,7 @@
          $error = " ";
          $_SESSION["myusername"];
          $_SESSION['login_user'] = $myusername;         
+         $error = "";
          header("location: welcome.php");
       }else {
          $error = "Your Login Name or Password is invalid";
