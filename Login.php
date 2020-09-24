@@ -9,6 +9,7 @@
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $count = mysqli_num_rows($result);
       if($count == 1) {
+         $error = " ";
          $_SESSION["myusername"];
          $_SESSION['login_user'] = $myusername;         
          header("location: welcome.php");
@@ -45,7 +46,7 @@
                   <label>Password  :</label> <input type = "password" name = "password" class = "box" /><br/><br />
                   <input type = "submit" value = " Submit "/><br />
                </form>               
-               <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>					
+               <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php if($error) echo $error; ?></div>					
             </div>				
          </div>			
       </div>
