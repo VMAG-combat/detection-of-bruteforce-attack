@@ -1,9 +1,8 @@
 <?php
-   ini_set('display_errors','1');
-   define('DB_SERVER', 'localhost');
-   define('DB_USERNAME', 'root');
-   define('DB_PASSWORD', 'root');
-   define('DB_DATABASE', 'issa');
+   define('DB_SERVER', 'sql12.freemysqlhosting.net');
+   define('DB_USERNAME', 'sql12367278');
+   define('DB_PASSWORD', 'fqubDnbQER');
+   define('DB_DATABASE', 'sql12367278');
    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-    //echo "successful connection"
+//    echo "successful connection"
 ?>
