@@ -43,9 +43,11 @@ marth
 
 * Example of `passwords.txt`:
 ```
-love
+cat
+dog
+tom
+jerry
 god
-sex
 secret
 ```
 
