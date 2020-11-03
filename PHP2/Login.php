@@ -1,9 +1,36 @@
 <?php
-   ini_set('display_errors','1');
-   include("Config.php");
-   session_start();
+	ini_set('display_errors','1');
+	include("Config.php");
+	session_start();
+	
+   
    $error = "";   
-   if($_SERVER["REQUEST_METHOD"] == "POST") {      
+   if($_SERVER["REQUEST_METHOD"] == "POST") {     
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$captcha=$_POST['g-recaptcha-response'];
+	// post request to server
+	$privatekey = "6Le2et4ZAAAAADaNURMEjAKgi5akkvJy2yv4_Y8z";
+	$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($privatekey) .  '&response=' . urlencode($captcha);
+	$response = file_get_contents($url);
+	$responseKeys = json_decode($response,true);
+	// require_once('recaptchalib.php');
+	// $privatekey = "6Le2et4ZAAAAADaNURMEjAKgi5akkvJy2yv4_Y8z";
+	// // $resp = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$privatekey.'&response='.$_POST['g-recaptcha-response']);
+	// $resp = recaptcha_check_answer ($privatekey,
+	// 							$_SERVER["REMOTE_ADDR"],
+	// 							$_POST["recaptcha_challenge_field"],
+	// 							$_POST["recaptcha_response_field"]);
+	// // $response = json_decode($resp);
+
+	if (!$responseKeys["success"]) {
+	// What happens when the CAPTCHA was entered incorrectly
+	echo '<h2>You are spammer ! Get out</h2>';
+	die ("The reCAPTCHA wasn't entered correctly. Go back and try it again." .
+		"(reCAPTCHA said: )");
+
+	} else {
+	// Your code here to handle a successful verification
+	 
       $myusername = mysqli_real_escape_string($db,$_POST['username']);
       $mypassword = mysqli_real_escape_string($db,$_POST['password']);       
       $sql = "SELECT id FROM admin WHERE username = '$myusername' and passcode = '$mypassword'";
@@ -17,8 +44,9 @@
          $error = "";
          header("location: welcome.php");
       }else {
-         $error = "Your Login Name or Password is invalid";
-      }
+         $error = "* Your Login Name or Password is invalid";
+	  }
+	}
    }
 ?>
 
@@ -54,6 +82,8 @@
 	      <input type="text" id="inputText" name="username" class="form-control" placeholder="User name" required autofocus><br>
 	      <label for="inputPassword" class="sr-only">Password</label>
 	      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required><br>
+		  <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+		  <div class="g-recaptcha" data-sitekey="6Le2et4ZAAAAAOC0WBf_FNbyxedEIVWJkI_q_UkD"></div>
 		 
 		 <div style = "font-size:18px; color:#cc0000;"><?php if($error) echo $error; ?></div>	<br>
 
