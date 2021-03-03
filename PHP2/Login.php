@@ -93,7 +93,7 @@
 		</label>
 	      </div>
 	      <button class="btn btn-lg btn-primary btn-block" name="btnLogin" type="submit">Sign in</button>
-	      <p class="mt-5 mb-3 text-muted">&copy; 2020-2021 | CSE3501 - ISAA</p>
+	      <p class="mt-5 mb-3 text-muted">&copy; 2020-2021 | CSE3502 - ISM</p>
          <p class="mt-5 mb-3 text-muted"><b>Team Members : </b><br> Abhishek Kumkar (18BCE1081) <br> Gunjan Agarwal (18BCE1168) <br> Mridu Shukla (18BCE1179)</p>
        
 	    </form>
